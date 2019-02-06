@@ -15,9 +15,11 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService{
     @Autowired
-    //@Qualifier("productDAO")
     private ProductDAO productDAO;
 
+    public void setProductDAO(ProductDAO productDAO) {
+        this.productDAO = productDAO;
+    }
 
     @Override
     @Transactional

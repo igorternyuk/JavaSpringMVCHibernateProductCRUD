@@ -11,6 +11,7 @@
     <title>::: Product CRUD :::</title>
 </head>
 <body>
-    <h1>Hello from Product CRUD</h1>
+    <h1>Product management</h1>
+    <a href="/products">Product list</a>
 </body>
 </html>

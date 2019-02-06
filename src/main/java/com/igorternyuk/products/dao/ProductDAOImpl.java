@@ -21,8 +21,12 @@ import java.util.List;
 public class ProductDAOImpl implements ProductDAO{
     private static final Logger logger = LoggerFactory.getLogger(ProductDAOImpl.class);
 
-    @Autowired
+    //@Autowired
     private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public void addNew(Product product) {
@@ -52,7 +56,8 @@ public class ProductDAOImpl implements ProductDAO{
 
     @Override
     public Product getById(int id) {
-        Session session = sessionFactory.getCurrentSession();
+        //Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         Product product = (Product)session.load(Product.class, new Integer(id));
         if(product != null){
             logger.info("The product with id = " + id + " was found");
@@ -76,7 +81,7 @@ public class ProductDAOImpl implements ProductDAO{
         Session session = sessionFactory.getCurrentSession();
         List<Product> products = session
                 .createQuery("from Product where name like :filter")
-                .setParameter("filter", filter + "%").list();
+                .setParameter("filter", "%" + filter + "%").list();
         return products;
     }
 }
